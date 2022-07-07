@@ -117,30 +117,30 @@ io.on('connection', function(socket) {
   socket.emit('message', 'Connecting...');
 
   client.on('qr', (qr) => {
-    console.log('QR RECEIVED', qr);
+    console.log('NIH QR NYA', qr);
     qrcode.toDataURL(qr, (err, url) => {
       socket.emit('qr', url);
-      socket.emit('message', 'QR Code received, scan please!');
+      socket.emit('message', 'Tuh QR Nya, Scan Supaya Connect!');
     });
   });
 
   client.on('ready', () => {
-    socket.emit('ready', 'Whatsapp is ready!');
-    socket.emit('message', 'Whatsapp is ready!');
+    socket.emit('ready', 'Siap Dipakai!');
+    socket.emit('message', 'Siap Dipakai!');
   });
 
   client.on('authenticated', () => {
-    socket.emit('authenticated', 'Whatsapp is authenticated!');
-    socket.emit('message', 'Whatsapp is authenticated!');
+    socket.emit('authenticated', 'Whatsapp Gak Ke Autentikasi!');
+    socket.emit('message', 'Whatsapp Gak Ke Autentikasi!');
     console.log('AUTHENTICATED');
   });
 
   client.on('auth_failure', function(session) {
-    socket.emit('message', 'Auth failure, restarting...');
+    socket.emit('message', 'Autentikasi Gagal, Merestart Kembali...');
   });
 
   client.on('disconnected', (reason) => {
-    socket.emit('message', 'Whatsapp is disconnected!');
+    socket.emit('message', 'Koneksi Whatsapp Terputus!');
     client.destroy();
     client.initialize();
   });
@@ -178,7 +178,7 @@ app.post('/send-message', [
   if (!isRegisteredNumber) {
     return res.status(422).json({
       status: false,
-      message: 'The number is not registered'
+      message: 'Nomor Gak Kedaftar:)'
     });
   }
 
@@ -315,7 +315,7 @@ app.post('/clear-message', [
   if (!isRegisteredNumber) {
     return res.status(422).json({
       status: false,
-      message: 'The number is not registered'
+      message: 'Nomor Gak Ke Daftar:)'
     });
   }
 
@@ -335,5 +335,5 @@ app.post('/clear-message', [
 });
 
 server.listen(port, function() {
-  console.log('App running on *: ' + port);
+  console.log('API Berjalan Di *: ' + port);
 });
