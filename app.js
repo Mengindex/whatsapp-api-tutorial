@@ -49,22 +49,22 @@ const client = new Client({
 });
 
 client.on('message', msg => {
-  if (msg.body == '!ping') {
-    msg.reply('pong');
-  } else if (msg.body == 'good morning') {
+  if (msg.body == '#ping') {
+    msg.reply('aktif:)');
+  } else if (msg.body == 'pagi') {
     msg.reply('selamat pagi');
-  } else if (msg.body == '!groups') {
+  } else if (msg.body == '#grup') {
     client.getChats().then(chats => {
       const groups = chats.filter(chat => chat.isGroup);
 
       if (groups.length == 0) {
-        msg.reply('You have no group yet.');
+        msg.reply('Kamu Gak Punya Grup...');
       } else {
-        let replyMsg = '*YOUR GROUPS*\n\n';
+        let replyMsg = '*GRUP KAMU*\n\n';
         groups.forEach((group, i) => {
           replyMsg += `ID: ${group.id._serialized}\nName: ${group.name}\n\n`;
         });
-        replyMsg += '_You can use the group id to send a message to the group._'
+        replyMsg += '_Kamu bisa menggunakan id grup untuk mengirimkan pesan ke grup...'
         msg.reply(replyMsg);
       }
     });
